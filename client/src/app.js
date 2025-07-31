@@ -1,53 +1,17 @@
 
-
-import React, { useState, useEffect, createContext, useContext } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'; 
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
 import NotFound from './pages/NotFound'; 
-
-
-export const AuthContext = createContext(null);
-
-const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null); 
-
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      const mockUser = { username: 'Ganesh', email: 'ganesh@example.com' }; // [4, 5, 3]
-      setUser(mockUser);
-    }
-  },);
-
-
-  const login = (userData, token) => {
-    setUser(userData);
-    localStorage.setItem('token', token); 
-  };
-
-  
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem('token');
-  };
-
-  const authContextValue = { user, login, logout };
-
-  return (
-    <AuthContext.Provider value={authContextValue}>
-      {children}
-    </AuthContext.Provider>
-  );
-};
+import { AuthContext, AuthProvider } from './context/AuthContext'; 
 
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(AuthContext);
   if (!user) {
-    // Redirect unauthenticated users to the login page
     return <Navigate to="/login" replace />;
   }
   return children;
@@ -56,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
-    <AuthProvider> {/* Wrap the entire application with the AuthProvider */}
+    <AuthProvider> {/* Wrap the entire application with the AuthProvider [16, 17] */}
       <BrowserRouter> {/* Enables client-side routing [6] */}
         <div className="App">
           {/* You might have a global Header/Navbar component here */}
@@ -69,7 +33,7 @@ function App() {
             <Route path="/register" element={<Register />} /> {/* Register page [6, 3] */}
 
             {/* Protected Route for Dashboard */}
-            {/* The /* allows for nested routes within the Dashboard, e.g., /dashboard/transactions */}
+            {/* The /* allows for nested routes within the Dashboard, e.g., /dashboard/transactions [6] */}
             <Route
               path="/dashboard/*"
               element={
@@ -79,7 +43,7 @@ function App() {
               }
             /> {/* Dashboard page [6, 3] */}
 
-            {/* Catch-all route for 404 Not Found page [3] */}
+            {/* Catch-all route for 404 Not Found page [18] */}
             <Route path="*" element={<NotFound />} />
           </Routes>
 
