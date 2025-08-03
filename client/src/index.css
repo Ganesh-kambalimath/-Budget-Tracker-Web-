@@ -12,3 +12,66 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.page-container {
+padding: 20px;
+margin-top: 20px;
+background-color: #ffffff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+max-width: 900px;
+margin-left: auto;
+margin-right: auto;
+}
+
+.page-title {
+font-size: 2.5rem;
+color: #333;
+margin-bottom: 20px;
+text-align: center;
+}
+
+.chart-container {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+margin-bottom: 20px;
+}
+
+.chart-title {
+font-size: 1.5rem;
+margin-bottom: 15px;
+text-align: center;
+color: #555;
+}
+
+.form-group label {
+font-weight: bold;
+margin-bottom: 5px;
+}
+
+.form-control {
+border-radius: 5px;
+}
+
+.btn-primary,.btn-success,.btn-danger,.btn-info,.btn-secondary {
+border-radius: 5px;
+}
+
+
+.table {
+margin-top: 20px;
+border-radius: 8px;
+overflow: hidden; 
+}
+.table thead th {
+background-color: #007bff;
+color: white;
+border-color: #007bff;
+}
+.table tbody tr:nth-of-type(odd) {
+background-color: #f8f9fa;
+}
+.table tbody tr:hover {
+background-color: #e2e6ea;
+}
