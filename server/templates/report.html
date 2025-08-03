@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyMap Monthly Report</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20mm;
+            color: #333;
+        }
+       .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+       .header h1 {
+            color: #28a745; /* Green for MoneyMap */
+            margin: 0;
+        }
+       .header p {
+            font-size: 14px;
+            color: #666;
+        }
+       .section-title {
+            font-size: 18px;
+            color: #007bff; /* Blue for sections */
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+       .summary-box {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+       .summary-item {
+            text-align: center;
+            flex: 1;
+            padding: 0 10px;
+        }
+       .summary-item h3 {
+            margin: 0 0 5px 0;
+            font-size: 14px;
+            color: #555;
+        }
+       .summary-item p {
+            font-size: 20px;
+            font-weight: bold;
+            margin: 0;
+        }
+       .income-amount { color: #28a745; } /* Green */
+       .expense-amount { color: #dc3545; } /* Red */
+       .savings-amount { color: #17a2b8; } /* Teal */
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            font-size: 12px;
+        }
+        table th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+       .category-summary ul {
+            list-style: none;
+            padding: 0;
+        }
+       .category-summary li {
+            margin-bottom: 5px;
+            font-size: 13px;
+        }
+       .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 10px;
+            color: #888;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>MoneyMap Financial Report</h1>
+        <p>For {{reportMonth}}</p>
+        <p>Prepared for {{userName}}</p>
+    </div>
+
+    <div class="summary-box">
+        <div class="summary-item">
+            <h3>Total Income</h3>
+            <p class="income-amount">${{totalIncome}}</p>
+        </div>
+        <div class="summary-item">
+            <h3>Total Expense</h3>
+            <p class="expense-amount">${{totalExpense}}</p>
+        </div>
+        <div class="summary-item">
+            <h3>Net Savings</h3>
+            <p class="savings-amount">${{netSavings}}</p>
+        </div>
+    </div>
+
+    <div class="section-title">Transaction Details</div>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#transactions}}
+            <tr>
+                <td>{{date}}</td>
+                <td>{{description}}</td>
+                <td>{{category}}</td>
+                <td>{{type}}</td>
+                <td>${{amount}}</td>
+                <td>{{notes}}</td>
+            </tr>
+            {{/transactions}}
+        </tbody>
+    </table>
+
+    <div class="section-title">Expense Breakdown by Category</div>
+    <div class="category-summary">
+        <ul>
+            {{#expenseByCategory}}
+            <li>{{category}}: ${{amount}}</li>
+            {{/expenseByCategory}}
+        </ul>
+    </div>
+
+    <div class="section-title">Income Breakdown by Category</div>
+    <div class="category-summary">
+        <ul>
+            {{#incomeByCategory}}
+            <li>{{category}}: ${{amount}}</li>
+            {{/incomeByCategory}}
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>MoneyMap - Your Personal Budget & Expense Tracker</p>
+        <p>Report generated on {{currentDate}}</p>
+    </div>
+</body>
+</html>
